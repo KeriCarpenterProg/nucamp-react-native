@@ -17,3 +17,14 @@ Choose “play” button.
 Go to VS Code
 Type “npn run android”
 Note — on 3/28/23 I haven’t gotten this to work much. It seems more touchy than the expo emulator.
+
+# JSON Server start up
+
+Go to
+~/Desktop/NucampFolder/json-server
+
+check your json-server version:
+json-server -v
+
+Start up your json-server
+json-server -H 0.0.0.0 --watch db.json -p 3001 -d 2000

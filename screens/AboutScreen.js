@@ -1,13 +1,13 @@
-import { ScrollView } from "react-native-gesture-handler";
-import { Card, Text } from "react-native-elements";
-import { PARTNERS } from "../shared/partners";
-import { ListItem, Avatar } from "react-native-elements";
+import { ScrollView, Text } from "react-native";
+import { Avatar, Card, ListItem } from "react-native-elements";
+import { useSelector } from "react-redux";
+import { baseUrl } from "../shared/baseUrl";
 
-const Mission = () => {
+function Mission() {
   return (
     <Card>
       <Card.Title>Our Mission</Card.Title>
-      <Card.Divider></Card.Divider>
+      <Card.Divider />
       <Text style={{ margin: 10 }}>
         We present a curated database of the best campsites in the vast woods
         and backcountry of the World Wide Web Wilderness. We increase access to
@@ -19,18 +19,20 @@ const Mission = () => {
       </Text>
     </Card>
   );
-};
+}
 
 const AboutScreen = () => {
+  const partners = useSelector((state) => state.partners);
+
   return (
     <ScrollView>
       <Mission />
-      <Card wrapperStyle={{ margin: 5 }}>
+      <Card>
         <Card.Title>Community Partners</Card.Title>
-        <Card.Divider></Card.Divider>
-        {PARTNERS.map((partner) => (
+        <Card.Divider />
+        {partners.partnersArray.map((partner) => (
           <ListItem key={partner.id}>
-            <Avatar source={partner.image} rounded />
+            <Avatar rounded source={{ uri: baseUrl + partner.image }} />
             <ListItem.Content>
               <ListItem.Title>{partner.name}</ListItem.Title>
               <ListItem.Subtitle>{partner.description}</ListItem.Subtitle>

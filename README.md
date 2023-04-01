@@ -28,3 +28,14 @@ json-server -v
 
 Start up your json-server
 json-server -H 0.0.0.0 --watch db.json -p 3001 -d 2000
+
+# Gotcha: No data is showing up. Your IP has changed.
+
+Get your IP address. On Mac the command is:
+ipconfig getifaddr en0
+That will echo your IP address for example:
+192.168.202.223
+
+Open up BaseUrl.js file in the /shared/ directory:
+export const baseUrl = "http://192.168.202.223:3001/";
+Replace the old IP with the new.

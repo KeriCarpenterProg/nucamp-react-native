@@ -39,3 +39,5 @@ That will echo your IP address for example:
 Open up BaseUrl.js file in the /shared/ directory:
 export const baseUrl = "http://192.168.202.223:3001/";
 Replace the old IP with the new.
+
+reload everything. That will probably work.

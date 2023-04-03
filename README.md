@@ -15,7 +15,7 @@ Choose the device already created or “Create Device”
 Choose “play” button.
 
 Go to VS Code
-Type “npn run android”
+Type “npm run android”
 Note — on 3/28/23 I haven’t gotten this to work much. It seems more touchy than the expo emulator.
 
 # JSON Server start up

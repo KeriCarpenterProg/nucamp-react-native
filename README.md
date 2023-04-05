@@ -15,7 +15,7 @@ Choose the device already created or “Create Device”
 Choose “play” button.
 
 Go to VS Code
-Type “npn run android”
+Type “npm run android”
 Note — on 3/28/23 I haven’t gotten this to work much. It seems more touchy than the expo emulator.
 
 # JSON Server start up
@@ -39,3 +39,5 @@ That will echo your IP address for example:
 Open up BaseUrl.js file in the /shared/ directory:
 export const baseUrl = "http://192.168.202.223:3001/";
 Replace the old IP with the new.
+
+reload everything. That will probably work.

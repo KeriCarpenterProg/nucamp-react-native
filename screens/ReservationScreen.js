@@ -7,6 +7,7 @@ import {
   Switch,
   Button,
   Modal,
+  Alert,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -26,10 +27,30 @@ const ReservationScreen = () => {
   };
 
   const handleReservation = () => {
+    Alert.alert(
+      "Begin Search?",
+      "Number of Campers: " +
+        campers +
+        "\nHike-in? " +
+        hikeIn +
+        "\nDate:  " +
+        date.toLocaleDateString("en-US"),
+      [
+        {
+          text: "Cancel",
+          onPress: () => resetForm(),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => resetForm(),
+        },
+      ],
+      { cancelable: false }
+    );
     console.log("campers:", campers);
     console.log("hikeIn:", hikeIn);
-    console.log("date:", date);
-    setShowModal(!showModal);
+    console.log("date:", date.toLocaleDateString("en-US"));
   };
 
   const resetForm = () => {

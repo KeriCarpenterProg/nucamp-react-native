@@ -45,11 +45,7 @@ const RenderCampsite = (props) => {
         );
       }
       if (isRightSwipe(gestureState)) {
-        Alert.alert(
-          "This should trigger the stars modal",
-          "It's in RenderCampsite.  Line 50.  \nThe working part is line 90."
-        );
-        props.onShowModal;
+        props.onShowModal();
       }
     },
   });

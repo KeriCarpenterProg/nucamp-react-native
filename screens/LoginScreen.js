@@ -4,14 +4,14 @@ import { CheckBox, Input } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
 
 const LoginScreen = () => {
-  const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
 
   const handleLogin = () => {
-    console.log("username: ", username);
-    console.log("password: ", password);
-    console.log("remember: ", remember);
+    console.log("username:", username);
+    console.log("password:", password);
+    console.log("remember:", remember);
     if (remember) {
       SecureStore.setItemAsync(
         "userinfo",
@@ -27,25 +27,27 @@ const LoginScreen = () => {
     }
   };
 
-  SecureStore.getItemAsync("userinfo").then((userdata) => {
-    const userinfo = JSON.parse(userdata);
-    if (userinfo) {
-      setUsername(userinfo.username);
-      setPassword(userinfo.password);
-      setRemember(true);
-    }
-  });
+  useEffect(() => {
+    SecureStore.getItemAsync("userinfo").then((userdata) => {
+      const userinfo = JSON.parse(userdata);
+      if (userinfo) {
+        setUsername(userinfo.username);
+        setPassword(userinfo.password);
+        setRemember(true);
+      }
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
       <Input
         placeholder="Username"
         leftIcon={{ type: "font-awesome", name: "user-o" }}
-        leftIconContainerStyle={styles.formIcon}
+        onChangeText={(text) => setUsername(text)}
         value={username}
         containerStyle={styles.formInput}
-        onChangeText={(text) => setUsername(text)}
-      ></Input>
+        leftIconContainerStyle={styles.formIcon}
+      />
       <Input
         placeholder="Password"
         leftIcon={{ type: "font-awesome", name: "key" }}
@@ -62,7 +64,7 @@ const LoginScreen = () => {
         containerStyle={styles.formCheckbox}
       />
       <View style={styles.formButton}>
-        <Button onPress={() => handleLogin()} color="#5637DD" title="Login" />
+        <Button onPress={() => handleLogin()} title="Login" color="#5637DD" />
       </View>
     </View>
   );

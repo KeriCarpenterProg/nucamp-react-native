@@ -152,7 +152,6 @@ const LoginNavigator = () => {
         name="Login"
         component={LoginScreen}
         options={({ navigation }) => ({
-          title: "Login",
           headerLeft: () => (
             <Icon
               name="sign-in"
@@ -237,7 +236,6 @@ const Main = () => {
           name="Login"
           component={LoginNavigator}
           options={{
-            title: "Login",
             drawerIcon: ({ color }) => (
               <Icon
                 name="sign-in"

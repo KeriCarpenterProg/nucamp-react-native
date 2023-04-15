@@ -7,6 +7,7 @@ import * as ImagePicker from "expo-image-picker";
 import { baseUrl } from "../shared/baseUrl";
 import logo from "../assets/images/logo.png";
 import * as ImageManipulator from "expo-image-manipulator";
+import * as MediaLibrary from "expo-media-library";
 
 const LoginTab = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -146,11 +147,12 @@ const RegisterTab = () => {
         allowsEditing: true,
         aspect: [1, 1],
       });
-      if (capturedImage.assets) {
+      if (!capturedImage.canceled) {
         console.log(capturedImage.assets[0]);
         // I'm commenting out this setImage and I'm going to rotate 90 and flip it
-        setImageUrl(capturedImage.assets[0].uri);
+        // setImageUrl(capturedImage.assets[0].uri);
         // Calling processImage function
+        processImage(capturedImage.assets[0].uri);
       }
     }
   };
@@ -166,14 +168,23 @@ const RegisterTab = () => {
       });
       if (capturedImage.assets) {
         console.log(capturedImage.assets[0]);
-        // I'm commenting out this setImage and I'm going to rotate 90 and flip it
-        setImageUrl(capturedImage.assets[0].uri);
         // Calling processImage function
-        // processImage(capturedImage.assets[0].uri);
+        processImage(capturedImage.assets[0].uri);
       }
     }
   };
 
+  const processImage = async (imgUri) => {
+    const processedImage = await ImageManipulator.manipulateAsync(
+      imgUri,
+      [{ resize: { width: 400 } }],
+      { format: ImageManipulator.SaveFormat.PNG }
+    );
+    console.log("This is the value of the processed image");
+    console.log(processedImage);
+    MediaLibrary.saveToLibraryAsync(processedImage.uri);
+    setImageUrl(processedImage.uri);
+  };
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -253,17 +264,6 @@ const RegisterTab = () => {
       </View>
     </ScrollView>
   );
-};
-
-const processImage = async (imgUri) => {
-  const processedImage = await ImageManipulator.manipulateAsync(
-    imgUri,
-    [{ rotate: 90 }, { resize: { height: 400 } }],
-    { compress: 1, format: ImageManipulator.SaveFormat.PNG }
-  );
-  console.log("This is the value of the processed image");
-  console.log(processedImage);
-  // setImageUrl(baseUrl + "images/git-logo.png");
 };
 
 const Tab = createBottomTabNavigator();

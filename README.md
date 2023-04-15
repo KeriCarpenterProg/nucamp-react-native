@@ -25,6 +25,7 @@ Go to
 
 check your json-server version:
 json-server -v
+0.17.3
 
 Start up your json-server
 json-server -H 0.0.0.0 --watch db.json -p 3001 -d 2000
